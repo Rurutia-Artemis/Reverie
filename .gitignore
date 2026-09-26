@@ -1,0 +1,8 @@
+.DS_Store
+.build/
+app/.build/
+app/Reverie.app/
+design/directions/.build/
+mediaremote-adapter/
+nowplaying_test
+docs/roundtable/*/exec/*.log
