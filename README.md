@@ -1,9 +1,11 @@
-# Reverie
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="Reverie: a spare second screen becomes a music panel and an AI usage dashboard">
+</p>
 
 A macOS menu-bar app that turns a small secondary display into a now-playing panel and an AI-usage dashboard.
 
-<p align="center"><img src="docs/screenshots/music.png" width="640"><img src="docs/screenshots/quota.png" width="640"></p>
-<p align="center"><img src="docs/screenshots/lyrics.png" width="640"><img src="docs/screenshots/cost.png" width="640"></p>
+<p align="center"><img src="docs/screenshots/music.png" width="49%" alt="Music page: cover art, title, progress and controls"> <img src="docs/screenshots/quota.png" width="49%" alt="Quota page: Claude and Codex rate-limit rings with subscription tier"></p>
+<p align="center"><img src="docs/screenshots/lyrics.png" width="49%" alt="Lyrics mode: five lines of synced lyrics beside the cover"> <img src="docs/screenshots/cost.png" width="49%" alt="Cost page: per-model spend at API prices with a daily bar chart"></p>
 
 **Three pages**, switched by hovering the top-right corner, a two-finger horizontal swipe, ⌃⌥⌘R, or the menu-bar icon:
 
@@ -12,6 +14,12 @@ A macOS menu-bar app that turns a small secondary display into a now-playing pan
 - **Cost** — what your local Claude Code and Codex usage *would* cost at API prices, per model, last 7 days or this month, with a daily bar chart. (Subscribers pay a flat fee; this is a reference number, not a bill.)
 
 Designed on a 5-inch 1280×720 panel; the 1280×720 canvas scales to any display size (letterboxed when the aspect ratio differs). Text is never smaller than 24 px and every hit target is at least 72 px, so it works from across the desk.
+
+## How it works
+
+<p align="center">
+  <img src="./assets/readme/workflow.svg" width="100%" alt="Three local sources feed three pages: macOS Now Playing feeds Music; the claude and codex CLIs feed Quota; local session logs priced with models.dev feed Cost">
+</p>
 
 ## Install
 

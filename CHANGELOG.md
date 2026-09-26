@@ -1,5 +1,20 @@
 # 更新日志
 
+## 2026-09-26 15:40 JST · 推送到 GitHub，README 加 SVG 头图与流程图
+
+- `git push origin public:main` 完成：https://github.com/Rurutia-Artemis/Reverie（公开）。
+- 按 vela 的 GitHub README 标准（吸收自 oil-oil/beautify-github-readme，本次同步到上游 55bdb1c）做了两张纯 SVG：`assets/readme/hero.svg`（1200×380：名字 104 单位、两行人话价值、mono 元数据、日落母题，右边是 1280×720 面板缩影：封面 + 进度、三圈额度环、按天柱）和 `assets/readme/workflow.svg`（1200×340：三个本机来源 → Reverie → 三页）。系统字体、无脚本、自带底色，正文字 ≥18 单位。
+- README 顶部换成 hero，截图改两列各 49% 并加 alt，「How it works」放流程图；`audit_readme.py` 通过（6 张本地图）。
+- 验证：内置浏览器按 900px / 360px 预览，改掉了描述撞面板、盒子文字超宽、右列标题被裁三处。
+- vela skill：references 跟到上游（新增 hybrid-svg-production.md，canvas / hero / svg-production 三篇小改），SKILL.md 加「纯 SVG 还是混合」一条并记录同步点；署名导流一节照旧不带。
+
+## 2026-09-26 15:10 JST · 准备开源
+
+- 签名身份可配置（REVERIE_SIGN_IDENTITY，默认 Reverie Local），没证书时 build.sh 临时签名并警告；`scripts/make-cert.sh` 一键建自签证书（本机已有证书，脚本没实跑过）；`scripts/setup.sh` 拉取并编译 mediaremote-adapter（固定 3ac3d4b）；rollback.sh 必须显式给备份路径。
+- 新 README（英文在前、中文在后：三页、安装、需要的授权、隐私、开发）、MIT LICENSE、docs/screenshots 五张固定数据截图。
+- `scripts/publish.sh`：把工作树导出到孤儿分支 public（不带历史；不带圆桌记录、AGENTS.md、CODEX_HANDOFF.md、v1 设计稿、tiff 图标；CLAUDE.md 去掉共享记忆一节，路径脱敏），署名用 GitHub noreply 邮箱。推送用 `git push origin public:main`。
+- GitHub 仓库已建：https://github.com/Rurutia-Artemis/Reverie（公开、空），origin 已指过去；public 分支 85 个文件 12.9 MB、一次提交，等主席确认后推送。
+
 ## 2026-09-26 14:40 JST · 任意分辨率
 
 - 界面仍按 1280×720 排版，显示时等比缩放到副屏大小，比例不同的屏上下或左右留底色（RootView 的 GeometryReader + scaleEffect）；右上角悬停区跟着画布换算。1280×720 上缩放系数为 1，一个像素不变。

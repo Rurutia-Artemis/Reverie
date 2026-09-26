@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
+  <title id="title">How Reverie gets its data</title>
+  <desc id="desc">Three local sources feed three pages. macOS Now Playing feeds the music page. The claude and codex command-line tools feed the quota page. Local session logs priced with models.dev feed the cost page. Everything stays on the Mac; the only network call fetches lyrics and covers from NetEase.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0E0F14"/>
+      <stop offset="1" stop-color="#07080A"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#6B6B72"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="340" rx="28" fill="url(#bg)"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif">
+    <!-- column headers -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18" font-weight="600" letter-spacing="2" fill="#6B6B72">
+      <text x="64" y="52">SOURCE · ON THIS MAC</text>
+      <text x="540" y="52">REVERIE</text>
+      <text x="860" y="52">PAGE ON THE SCREEN</text>
+    </g>
+
+    <!-- sources -->
+    <g id="sources" font-size="22" fill="#F5F5F7">
+      <g transform="translate(64 76)">
+        <rect width="380" height="64" rx="14" fill="#17181D" stroke="#FFFFFF" stroke-opacity="0.10"/>
+        <text x="20" y="28" font-weight="600">macOS Now Playing</text>
+        <text x="20" y="52" font-size="18" fill="#9C9CA3">MediaRemote via mediaremote-adapter</text>
+      </g>
+      <g transform="translate(64 156)">
+        <rect width="380" height="64" rx="14" fill="#17181D" stroke="#FFFFFF" stroke-opacity="0.10"/>
+        <text x="20" y="28" font-weight="600">claude -p · codex app-server</text>
+        <text x="20" y="52" font-size="18" fill="#9C9CA3">get_usage · rateLimits/read · no tokens read</text>
+      </g>
+      <g transform="translate(64 236)">
+        <rect width="380" height="64" rx="14" fill="#17181D" stroke="#FFFFFF" stroke-opacity="0.10"/>
+        <text x="20" y="28" font-weight="600">Local session logs</text>
+        <text x="20" y="52" font-size="18" fill="#9C9CA3">~/.claude/projects · ~/.codex/sessions</text>
+      </g>
+    </g>
+
+    <!-- center -->
+    <g id="core" transform="translate(540 130)">
+      <rect width="240" height="96" rx="18" fill="#17181D" stroke="#FFFFFF" stroke-opacity="0.14"/>
+      <text x="120" y="42" text-anchor="middle" font-size="26" font-weight="700" fill="#F5F5F7">Reverie</text>
+      <text x="120" y="72" text-anchor="middle" font-size="18" fill="#9C9CA3">menu-bar app · one canvas</text>
+    </g>
+
+    <!-- pages -->
+    <g id="pages" font-size="22" fill="#F5F5F7">
+      <g transform="translate(860 76)">
+        <rect width="296" height="64" rx="14" fill="#17181D" stroke="#FF5A36" stroke-opacity="0.55"/>
+        <rect x="0" y="0" width="6" height="64" rx="3" fill="#FF5A36"/>
+        <text x="24" y="28" font-weight="600">Music</text>
+        <text x="24" y="52" font-size="18" fill="#9C9CA3">cover · lyrics · controls · like</text>
+      </g>
+      <g transform="translate(860 156)">
+        <rect width="296" height="64" rx="14" fill="#17181D" stroke="#FF9500" stroke-opacity="0.55"/>
+        <rect x="0" y="0" width="6" height="64" rx="3" fill="#FF9500"/>
+        <text x="24" y="28" font-weight="600">Quota</text>
+        <text x="24" y="52" font-size="18" fill="#9C9CA3">5 h · weekly · per model · plan</text>
+      </g>
+      <g transform="translate(860 236)">
+        <rect width="296" height="64" rx="14" fill="#17181D" stroke="#2F7BFF" stroke-opacity="0.55"/>
+        <rect x="0" y="0" width="6" height="64" rx="3" fill="#2F7BFF"/>
+        <text x="24" y="28" font-weight="600">Cost</text>
+        <text x="24" y="52" font-size="18" fill="#9C9CA3">per model · week or month</text>
+      </g>
+    </g>
+
+    <!-- connections -->
+    <g fill="none" stroke="#6B6B72" stroke-width="2">
+      <path d="M444 108 C 490 108, 496 168, 540 168"/>
+      <path d="M444 188 L 540 178"/>
+      <path d="M444 268 C 490 268, 496 190, 540 190"/>
+    </g>
+    <g fill="none" stroke="#6B6B72" stroke-width="2" marker-end="url(#arrow)">
+      <path d="M780 168 C 816 168, 820 108, 856 108"/>
+      <path d="M780 178 L 856 188"/>
+      <path d="M780 190 C 816 190, 820 268, 856 268"/>
+    </g>
+  </g>
+</svg>
