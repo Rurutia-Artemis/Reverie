@@ -1,5 +1,11 @@
 # 更新日志
 
+## 2026-09-26 16:05 JST · 三语 README，头图面板缩影重排
+
+- README 分成三份：`README.md`（英文）、`README.zh-CN.md`、`README.ja.md`，顶部互相链接，内容对齐（三页、安装、授权、隐私、开发、致谢）。
+- 修头图 bug：面板缩影里「MUSIC / COST / QUOTA」标签压在柱状图上、柱子横跨封面区。重排成三块：左封面 + 歌名条 + 控制点，中间七根按天柱，右边三圈 Claude 环加一圈 Codex 环，标签各归各区。
+- 验证：三份 README 都过 audit；头图在内置浏览器按 1200px 预览；已推送。
+
 ## 2026-09-26 15:40 JST · 推送到 GitHub，README 加 SVG 头图与流程图
 
 - `git push origin public:main` 完成：https://github.com/Rurutia-Artemis/Reverie（公开）。

@@ -2,6 +2,8 @@
   <img src="./assets/readme/hero.svg" width="100%" alt="Reverie: a spare second screen becomes a music panel and an AI usage dashboard">
 </p>
 
+<p align="center"><b>English</b> · <a href="./README.zh-CN.md">中文</a> · <a href="./README.ja.md">日本語</a></p>
+
 A macOS menu-bar app that turns a small secondary display into a now-playing panel and an AI-usage dashboard.
 
 <p align="center"><img src="docs/screenshots/music.png" width="49%" alt="Music page: cover art, title, progress and controls"> <img src="docs/screenshots/quota.png" width="49%" alt="Quota page: Claude and Codex rate-limit rings with subscription tier"></p>
@@ -62,7 +64,7 @@ REVERIE_SNAPSHOT=/tmp/x.png REVERIE_PAGE=cost REVERIE_SNAPSHOT_SIZE=1920x1080 ap
 swift scripts/check-window.swift                              # what is on the target display right now
 ```
 
-`CLAUDE.md` describes the architecture and conventions in detail (in Chinese). Design tokens live in `app/Sources/UI/Theme.swift`.
+`CLAUDE.md` describes the architecture and conventions in detail (in Chinese). Design tokens live in `app/Sources/UI/Theme.swift`. Bundled UI text is Chinese (it was built for a Chinese-speaking desk); the code and this README are English.
 
 ## Credits
 
@@ -71,19 +73,3 @@ swift scripts/check-window.swift                              # what is on the t
 - Font: 阿里妈妈方圆体 (Alimama FangYuanTi VF) © Taobao (China) Software Co., Ltd., bundled under its free commercial license
 
 License: MIT.
-
----
-
-## 中文说明
-
-一个 macOS 菜单栏小程序，把一块小副屏变成正在播放面板和 AI 用量面板。三页：**音乐**（网易云 / Apple Music 的封面、歌名、歌词、进度、上一首 / 播放 / 下一首 / 红心，背景随封面变色）、**额度**（Claude Code 与 Codex 的 5 小时、每周、按模型额度，订阅档位，周期进度，「用得偏快」提醒；直接问本机命令行，不经过第三方）、**消费**（本机记录按 API 价格折算成美元，按模型拆开，7 天或本月；订阅用户实际付的是月费，这只是参考数）。
-
-翻页：鼠标移到副屏右上角点「音乐 / 额度 / 消费」，或两指横滑，或 ⌃⌥⌘R，或菜单栏图标。右上角还有设置和退出。界面按 1280×720 排版，其它分辨率等比缩放。
-
-**安装**：见上面的命令。`scripts/setup.sh` 拉取并编译适配器，`scripts/make-cert.sh` 建一个自签证书让签名身份稳定（否则每次重编都要重新给辅助功能授权），`app/build.sh` 编译，`scripts/deploy.sh` 装到「应用程序」并可开机自启。第一次运行会记住最小的那块非主屏，设置里可以改。
-
-**需要的授权**：辅助功能（挪窗口、网易云红心）、自动化 → 音乐（Apple Music 红心）、登录项（开机自启）。
-
-**隐私**：全部本机运行。歌词和高清封面按歌名 + 歌手向网易云公开接口取，这是唯一的联网。额度靠起 `claude -p`（控制请求 `get_usage`，不提问不耗额度）和 `codex app-server` 读，不读也不存令牌；Claude 的订阅倍数（20x）用系统 `security` 命令读 Claude Code 自己存的凭证项，只取档位字段。消费统计读 `~/.claude/projects` 与 `~/.codex/sessions` 下的记录，价格来自 models.dev，增量缓存在 `~/Library/Application Support/Reverie/`。
-
-更多开发说明见 `CLAUDE.md`。许可证 MIT；方圆体按阿里妈妈免费商用许可内嵌，版权归淘宝（中国）软件有限公司。
