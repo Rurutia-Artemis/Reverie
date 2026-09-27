@@ -371,7 +371,8 @@ struct LegendRow: View {
                     }
                     .frame(height: 58)
                     HStack(spacing: 10) {
-                        tx(TimeText.reset(card.resetsAt, now: now), T.Size.meta, bold: false).foregroundStyle(T.text2).fixedSize()
+                        tx(TimeText.reset(card.resetsAt, now: now), T.Size.meta, bold: false).foregroundStyle(T.text2)
+                            .lineLimit(1).minimumScaleFactor(0.7)   // 空间不够时缩字，不许把卡片撑宽
                         if card.pace(now: now)?.fast == true { FastBadge() }
                     }
                 }
@@ -383,7 +384,8 @@ struct LegendRow: View {
                 VStack(alignment: .leading, spacing: 6) {
                     tx(card.title, label).foregroundStyle(T.text).lineLimit(1).minimumScaleFactor(0.75)
                     HStack(spacing: 10) {
-                        tx(TimeText.reset(card.resetsAt, now: now), T.Size.meta, bold: false).foregroundStyle(T.text2).fixedSize()
+                        tx(TimeText.reset(card.resetsAt, now: now), T.Size.meta, bold: false).foregroundStyle(T.text2)
+                            .lineLimit(1).minimumScaleFactor(0.7)   // 空间不够时缩字，不许把卡片撑宽
                         if card.pace(now: now)?.fast == true { FastBadge() }
                     }
                 }
@@ -458,7 +460,7 @@ struct CycleBar: View {
             let elapsed = min(1, max(0, 1 - r.timeIntervalSince(now) / (w * 60)))
             let soon = elapsed >= 0.85
             let (c1, c2) = QuotaColors.colors(for: card.id)
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 14) {
                 HStack(alignment: .firstTextBaseline, spacing: 10) {
                     tx((9000...12000).contains(w) ? "本周已过" : ((240...360).contains(w) ? "这 5 小时已过" : "本周期已过"), T.Size.meta)
                         .foregroundStyle(T.text)
@@ -476,7 +478,7 @@ struct CycleBar: View {
                             .shadow(color: c1.opacity(0.45), radius: 8)
                     }
                 }
-                .frame(height: 12)
+                .frame(height: 22)
             }
         }
     }

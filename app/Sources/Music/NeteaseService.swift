@@ -57,9 +57,17 @@ enum NeteaseService {
 
     /// 「我喜欢的音乐」的歌曲 id（网易云本地明文缓存，无需登录）。读不到返回 nil。
     static func likedSongIDs() -> Set<String>? {
-        let base = NSHomeDirectory() + "/Library/Containers/com.netease.163music/Data/Documents/storage/sqlite_storage.sqlite3"
+        // 新版网易云（3.1 起，不在沙盒里）存在 Application Support；旧版在 Containers，旧文件卸载后也会留着。
+        // 两处都有时取最近改过的那份，否则会读到停更的旧收藏。
         let fm = FileManager.default
-        guard fm.fileExists(atPath: base) else { return nil }
+        let candidates = [
+            NSHomeDirectory() + "/Library/Application Support/com.netease.163music/Documents/storage/sqlite_storage.sqlite3",
+            NSHomeDirectory() + "/Library/Containers/com.netease.163music/Data/Documents/storage/sqlite_storage.sqlite3",
+        ]
+        func modified(_ path: String) -> Date {
+            (try? fm.attributesOfItem(atPath: path)[.modificationDate] as? Date) ?? .distantPast
+        }
+        guard let base = candidates.filter({ fm.fileExists(atPath: $0) }).max(by: { modified($0) < modified($1) }) else { return nil }
         let tmp = NSTemporaryDirectory() + "reverie_ne_store.sqlite3"
         for ext in ["", "-wal", "-shm"] {
             try? fm.removeItem(atPath: tmp + ext)

@@ -1,5 +1,12 @@
 # 更新日志
 
+## 2026-09-27 22:40 JST · 红心读新版网易云数据；额度页周期条加粗下移；图例不再撑宽卡片
+
+- 红心不亮：网易云 3.1 起不在沙盒里，数据库挪到 `~/Library/Application Support/com.netease.163music/Documents/storage/`，Reverie 还读 `Containers` 里停在 9 月 7 日的旧库（1742 首，新库 1773 首，《Cha Cha Cha》只在新库）。`likedSongIDs()` 两处都看，取最近改过的那份；CLAUDE.md 同步。
+- 额度页周期条：卡片与条之间 30 → 40，文字与条 10 → 14，条高 12 → 22，左右和卡片边对齐（去掉 8px 内缩）；条下沿离屏底约 56。
+- 两行「偏快」时图例第二行把 Claude 卡片撑宽、吃掉卡片间距（686f4e1 已修，这里补记）。
+- 验证：quota-busy / quota-4 / 深色出图；实时音乐快照红心亮；test.sh 通过；部署 DELETE_PREV，md5 一致。
+
 ## 2026-09-26 16:05 JST · 三语 README，头图面板缩影重排
 
 - README 分成三份：`README.md`（英文）、`README.zh-CN.md`、`README.ja.md`，顶部互相链接，内容对齐（三页、安装、授权、隐私、开发、致谢）。

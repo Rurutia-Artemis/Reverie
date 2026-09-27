@@ -66,7 +66,7 @@ swift scripts/check-window.swift                                                
 
 ## 收藏（红心）
 
-1. **网易云读状态**：读网易云本地 SQLite 明文缓存 `~/Library/Containers/com.netease.163music/Data/Documents/storage/sqlite_storage.sqlite3`：`historyPlaylists` 里 `jsonStr LIKE '%喜欢的音乐"%'` 找歌单 id，`playlistTrackIds` 的 `trackIds[].id` 是收藏集合（`NeteaseService.likedSongIDs()`，每 30 秒刷新）；当前曲目的网易云 id 来自 cloudsearch 匹配。
+1. **网易云读状态**：读网易云本地 SQLite 明文缓存 `~/Library/Application Support/com.netease.163music/Documents/storage/sqlite_storage.sqlite3`（新版 3.1+；旧版在 `~/Library/Containers/com.netease.163music/Data/Documents/storage/`，两处都有时取最近改过的）：`historyPlaylists` 里 `jsonStr LIKE '%喜欢的音乐"%'` 找歌单 id，`playlistTrackIds` 的 `trackIds[].id` 是收藏集合（`NeteaseService.likedSongIDs()`，每 30 秒刷新）；当前曲目的网易云 id 来自 cloudsearch 匹配。
 2. **网易云写**：osascript 点「控制」菜单，菜单项名随状态变（「喜欢歌曲」/「取消喜欢」，都是 ⌘L），脚本两者都判断（`Controls.likeScript`）。需要「辅助功能」授权。
 3. **Apple Music**：`AppleMusicLike` 用 NSAppleScript 读写 `favorited of current track`，先判断 Music 在运行才发事件；首次会弹「控制音乐」的自动化授权。
 4. 其它来源不支持红心，按钮变灰。

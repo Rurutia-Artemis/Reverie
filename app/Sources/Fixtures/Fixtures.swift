@@ -13,6 +13,7 @@ enum FixtureScene: String, CaseIterable {
     case musicOther = "music-other"
     case quotaDesign = "quota-design"
     case quotaLive = "quota-live"
+    case quotaBusy = "quota-busy"
     case quota1 = "quota-1"
     case quota4 = "quota-4"
     case quota6 = "quota-6"
@@ -130,6 +131,11 @@ enum Fixtures {
         switch scene {
         case .quota1: vm.cards = [claudeWeek]
         case .quotaLive: vm.cards = [claude5h, claudeWeek, claudeFable, codexWeek]   // 2026-09-25 实际：Codex Pro 只有每周
+        case .quotaBusy:    // 2026-09-27 实际：刚重置完一周，每周和 Fable 都偏快，两行都带小牌
+            vm.cards = [pct("claude.fiveHour", "Claude", "5 小时", used: 71, window: 300, resetIn: 91),
+                        pct("claude.weekly", "Claude", "每周", used: 13, window: 10080, resetIn: 9900),
+                        pct("claude.row.claude-weekly-scoped-fable", "Claude", "Fable 每周", used: 20, window: 10080, resetIn: 9900),
+                        pct("codex.weekly", "Codex", "每周", used: 5, window: 10080, resetIn: 9840)]
         case .quota4: vm.cards = [claude5h, claudeWeek, codexWeek, codexCredits]
         case .quota6: vm.cards = [claude5h, claudeWeek, claudeFable, codexWeek, codex5h, codexReview]
         case .quota0: vm.cards = []

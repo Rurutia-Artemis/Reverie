@@ -74,9 +74,9 @@ struct QuotaPage: View {
 
     /// 一个来源一列：上面是卡片，下面是它的周期进度条，宽度对齐。
     private func column(_ g: (provider: String, cards: [QuotaCard]), layout: ProviderTile.Layout, width: CGFloat) -> some View {
-        VStack(spacing: 30) {
-            ProviderTile(provider: g.provider, cards: g.cards, layout: layout, vm: vm)
-            CycleBar(provider: g.provider, cards: g.cards, now: vm.now).padding(.horizontal, 8)
+        VStack(spacing: 40) {   // 卡片和周期条之间多留一点，条子下沿离屏底约 56，和左边距一致
+            ProviderTile(provider: g.provider, cards: g.cards, layout: layout, vm: vm, width: width)
+            CycleBar(provider: g.provider, cards: g.cards, now: vm.now)
         }
         .frame(width: width)
     }
@@ -101,7 +101,7 @@ struct QuotaPage: View {
                 HStack(alignment: .top, spacing: 20) {
                     ForEach(0..<2, id: \.self) { i in
                         if i == big {
-                            column(g[i], layout: .wide(outer: 296), width: 744)
+                            column(g[i], layout: .wide(outer: 272), width: 744)   // 给图例留够宽度：「周日 13:00 偏快」+ 大数字
                         } else {
                             column(g[i], layout: .narrow, width: 404)
                         }
@@ -124,6 +124,7 @@ struct ProviderTile: View {
     let cards: [QuotaCard]
     let layout: Layout
     let vm: QuotaVM
+    var width: CGFloat? = nil       // 卡片宽度定死，内容再宽也只能在里面压缩
 
     private var ringCards: [QuotaCard] { cards.filter(\.isRing) }
     private var staleMinutes: Int? { vm.stale[provider] }
@@ -134,7 +135,22 @@ struct ProviderTile: View {
     }
 
     var body: some View {
+        content
+            .padding(28)
+            .frame(width: width, height: QuotaPage.tileHeight, alignment: .topLeading)
+            .background(Panel())
+            .saturation(staleMinutes == nil ? 1 : 0.35)
+            .opacity(staleMinutes == nil ? 1 : 0.8)
+    }
+
+    private var content: some View {
         VStack(alignment: .leading, spacing: 0) {
+            header
+            bodyForLayout
+        }
+    }
+
+    private var header: some View {
             HStack(alignment: .center) {
                 HStack(spacing: 12) {
                     num(provider, T.Size.provider, weight: .heavy).foregroundStyle(T.text)
@@ -151,12 +167,15 @@ struct ProviderTile: View {
                     tx(note, T.Size.meta, bold: false).foregroundStyle(T.text2)
                 }
             }
+    }
+
+    @ViewBuilder private var bodyForLayout: some View {
             switch layout {
             case .wide(let outer):
-                HStack(alignment: .center, spacing: 30) {   // 和标题行之间留 padding，别让圆环贴着 Max 小牌
+                HStack(alignment: .center, spacing: 24) {   // 和标题行之间留 padding，别让圆环贴着 Max 小牌
                     if !ringCards.isEmpty {
-                        rings(outer: outer, line: outer >= 260 ? 30 : (outer >= 220 ? 28 : 20), step: outer >= 260 ? 72 : (outer >= 220 ? 62 : 44))
-                            .frame(width: outer + 30, height: outer + 30)
+                        rings(outer: outer, line: outer >= 260 ? 28 : (outer >= 220 ? 26 : 20), step: outer >= 260 ? 66 : (outer >= 220 ? 58 : 44))
+                            .frame(width: outer + 28, height: outer + 28)
                     }
                     VStack(spacing: cards.count > 3 ? 8 : 18) {
                         ForEach(cards) { LegendRow(card: $0, now: vm.now, showUsed: vm.showUsed, compact: outer < 260 || cards.count > 3) }
@@ -183,12 +202,6 @@ struct ProviderTile: View {
                 }
                 .padding(.top, 12)
             }
-        }
-        .padding(28)
-        .frame(height: QuotaPage.tileHeight, alignment: .topLeading)
-        .background(Panel())
-        .saturation(staleMinutes == nil ? 1 : 0.35)
-        .opacity(staleMinutes == nil ? 1 : 0.8)
     }
 
     private func rings(outer: CGFloat, line: CGFloat, step: CGFloat) -> some View {
