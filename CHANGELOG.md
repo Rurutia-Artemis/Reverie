@@ -1,5 +1,11 @@
 # 更新日志
 
+## 2026-09-27 22:40 JST · 音乐页进度条时间不再被圆点压住；歌词放大、带翻译时重排
+
+- 进度条：圆点比条子高，旧写法外框只按条子算高度，条子被撑到圆点那么粗，下面的时间数字贴上去。改成条子 14、圆点 24，外框按圆点算，时间排在圆点下面；普通页和歌词模式同一粗细。
+- 歌词模式：其它行 32 → 38（行高 64 → 62），当前句 50 → 56，翻译 26 → 32（新 `T.Size.lyricTranslation`）；带翻译时当前句块高 150，上下留白对称。
+- 验证：music-translation-lyrics / music-lyrics / music-playing 出图，实时快照（长罗马尼亚语句 + 中文翻译）；部署 DELETE_PREV，md5 一致。
+
 ## 2026-09-27 22:40 JST · 红心读新版网易云数据；额度页周期条加粗下移；图例不再撑宽卡片
 
 - 红心不亮：网易云 3.1 起不在沙盒里，数据库挪到 `~/Library/Application Support/com.netease.163music/Documents/storage/`，Reverie 还读 `Containers` 里停在 9 月 7 日的旧库（1742 首，新库 1773 首，《Cha Cha Cha》只在新库）。`likedSongIDs()` 两处都看，取最近改过的那份；CLAUDE.md 同步。

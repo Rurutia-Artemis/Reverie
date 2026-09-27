@@ -45,7 +45,7 @@ struct MusicPage: View {
                     .buttonStyle(PressStyle())
                     .padding(.top, 6)
                     Spacer(minLength: 16)
-                    ProgressBar(vm: vm, height: 10)
+                    ProgressBar(vm: vm, height: 14)
                     // 播放控制居中；左边歌词、右边红心，两边对称。
                     HStack(spacing: 0) {
                         IconButton(symbol: "text.quote", size: 88, icon: 36, enabled: !vm.lyrics.isEmpty, action: actions.toggleLyrics)
@@ -88,7 +88,7 @@ struct MusicPage: View {
             }
             .padding(.leading, 56).padding(.top, 128)
             HStack(spacing: 28) {
-                ProgressBar(vm: vm, height: 6).frame(width: 520)
+                ProgressBar(vm: vm, height: 14).frame(width: 520)
                 Spacer()
                 // 歌词按钮在这里是亮的，再点一下回到普通页（点封面也行）。
                 IconButton(symbol: "text.quote", size: 88, icon: 36, tint: T.onBackground(vm.palette.progressStart), action: actions.toggleLyrics)
@@ -113,19 +113,19 @@ struct MusicPage: View {
             ForEach(lines, id: \.0) { d, text in
                 if d == 0 {
                     let translation = showTranslation && vm.lyrics.indices.contains(idx) ? vm.lyrics[idx].translation : nil
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading, spacing: 6) {
                         tx(text ?? "", T.Size.lyricCurrent, cjkTracking: -1).foregroundStyle(T.text)
                             .lineLimit(1).minimumScaleFactor(0.6)
                             .shadow(color: vm.palette.glow.opacity(0.35), radius: 16)
                         if let translation {
-                            tx(translation, T.Size.lyricNext, bold: false).foregroundStyle(T.text2).lineLimit(1).minimumScaleFactor(0.8)
+                            tx(translation, T.Size.lyricTranslation, bold: false).foregroundStyle(T.text2).lineLimit(1).minimumScaleFactor(0.8)
                         }
                     }
-                    .frame(height: translation == nil ? 92 : 132, alignment: .leading)
+                    .frame(height: translation == nil ? 96 : 150, alignment: .leading)
                 } else {
                     tx(text ?? "", T.Size.lyricOther, bold: false).foregroundStyle(T.text.opacity(abs(d) == 1 ? 0.42 : 0.2))
                         .lineLimit(1).minimumScaleFactor(0.8)
-                        .frame(height: 64, alignment: .leading)
+                        .frame(height: 62, alignment: .leading)
                 }
             }
         }

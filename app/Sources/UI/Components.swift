@@ -263,21 +263,24 @@ struct TransportControls: View {
 
 struct ProgressBar: View {
     let vm: MusicVM
-    var height: CGFloat = 8
+    var height: CGFloat = 14
     var body: some View {
+        // 圆点比条子高：外框按圆点算高度，条子自己定高，时间数字才不会被圆点压住。
+        let knob = height + 10
         VStack(spacing: 10) {
             GeometryReader { g in
                 let x = g.size.width * vm.progress
                 ZStack(alignment: .leading) {
-                    Capsule().fill(T.ink(0.22))
+                    Capsule().fill(T.ink(0.22)).frame(height: height)
                     Capsule().fill(T.palette.playFill.opacity(0.95))
-                        .frame(width: max(height, x))
-                    Circle().fill(.white).frame(width: 18, height: 18)
+                        .frame(width: max(height, x), height: height)
+                    Circle().fill(.white).frame(width: knob, height: knob)
                         .shadow(color: T.shadow(0.5), radius: 4, y: 2)
-                        .offset(x: x - 9)
+                        .offset(x: x - knob / 2)
                 }
+                .frame(width: g.size.width, height: g.size.height, alignment: .leading)
             }
-            .frame(height: height)
+            .frame(height: knob)
             HStack {
                 num(fmtTime(vm.elapsed), T.Size.meta, weight: .semibold)
                 Spacer()

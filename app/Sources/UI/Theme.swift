@@ -186,8 +186,9 @@ enum T {
         static let costHero: CGFloat = 72       // 消费页圆环中间的总金额（不带 $）
         static let costAmount: CGFloat = 36     // 消费页图例里每个模型的金额
         static let unit: CGFloat = 28
-        static let lyricCurrent: CGFloat = 50
-        static let lyricOther: CGFloat = 32
+        static let lyricCurrent: CGFloat = 56
+        static let lyricOther: CGFloat = 38
+        static let lyricTranslation: CGFloat = 32
         static let lyricsTitle: CGFloat = 34
         static let lyricsArtist: CGFloat = 26
         static let idleClock: CGFloat = 150
